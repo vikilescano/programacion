@@ -1,33 +1,60 @@
 #Ejercicio 1: Invertir una lista
 numeros = [1, 2, 3, 4, 5]
 ciudades = ['Bogotá', 'Rosario', 'San Fernando', 'San Miguel']
+lista_vacia = [42]
 
 def invertir_lista(lista):
     return list(reversed(lista))
 
 print(invertir_lista(numeros))
 print(invertir_lista(ciudades))
+print(invertir_lista(lista_vacia))
 
-
+#%%
+#otra opcion
+def invertir_lista(lista):
+    l = lista.copy()
+    res = []
+    for i in range(len(lista)):
+        res.append(l[len(l)-1-i])
+    return res
+print(invertir_lista(numeros))
 
 #Ejercicio 2: Conjetura de Collatz
 
-def collatz(nro):
-    nro = int(nro)
-    if nro <= 0:
-        print(f"el número debe ser mayor a 0")
+#version recursiva (llama de nuevo a la función), distinto a versión iterativa (bucle)
+def collatz(n):
+    if n == 1: 
+        return 0
+    else: 
+        if n % 2 == 0:
+            n = n/2
+        else:
+            n = n*3 + 1
+        respuesta = collatz(n)
+        return respuesta + 1
+print(collatz(4))
+
+#otra opción iterativa
+def collatz(n):
+    contador = 0
+    while n != 1:
+        if n % 2 == 0:
+            n = n / 2
+        else:
+            n = n * 3 + 1
+        contador += 1
+    return contador
+print(collatz(4))
+
+#otra opción recursiva usando factorial
+def factorial(n):
+    if n == 1:
+        res = 1
     else:
-         lista_numeros = [nro]
-         while  nro != 1:
-            if nro % 2 == 0: 
-                nro = nro//2
-            else:
-                nro = nro * 3 + 1
-            lista_numeros.append(nro)  
-    return lista_numeros  
-
-print(collatz(20)) 
-
+        res = n * factorial(n-1)
+    return res
+print(factorial(5)) 
 
 
 #Ejercicio 3: Diccionarios
